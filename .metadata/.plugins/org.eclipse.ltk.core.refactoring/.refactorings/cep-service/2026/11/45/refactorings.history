@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;SecurityConfig.java&apos; to &apos;municipio-service/src/main/java/com.store.municipio&apos;&#x0D;&#x0A;- Original project: &apos;cep-service&apos;&#x0D;&#x0A;- Destination element: &apos;municipio-service/src/main/java/com.store.municipio&apos;&#x0D;&#x0A;- Original element: &apos;com.store.cep.SecurityConfig.java&apos;" description="Copy compilation unit" destination="=municipio-service/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.store.municipio" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.store.cep{SecurityConfig.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1793719921312" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,5 @@
+package com.store.municipio.client;
+
+public class CepClient {
+
+}

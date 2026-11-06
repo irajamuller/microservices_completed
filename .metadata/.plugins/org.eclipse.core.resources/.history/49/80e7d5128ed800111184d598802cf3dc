@@ -1,0 +1,5 @@
+package com.store.municipio.evento;
+
+public class MunicipioEvent {
+
+}

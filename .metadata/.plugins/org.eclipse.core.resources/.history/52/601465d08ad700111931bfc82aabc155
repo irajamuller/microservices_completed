@@ -1,0 +1,14 @@
+package com.store.gateway.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import reactor.core.publisher.Mono;
+
+@FeignClient(name = "USUARIO-SERVICE")
+public interface UsuarioClient {
+	
+	@GetMapping("/token/{token}")
+	public Mono<Boolean> isValidToken(@PathVariable String token);
+}

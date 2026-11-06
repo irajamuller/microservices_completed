@@ -1,0 +1,32 @@
+package com.store.gateway;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+
+@Configuration
+@EnableWebFluxSecurity
+public class SecurityConfig {
+
+	private final JwtAuthFilter jwtAuthWebFilter;
+
+    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
+        this.jwtAuthFilter = jwtAuthFilter;
+    }
+    
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        http
+            .csrf(ServerHttpSecurity.CsrfSpec::disable)
+            .authorizeExchange(exchanges -> exchanges
+                .pathMatchers("/usuario/**").permitAll() // Exemplo de rota pública de autenticação
+                .anyExchange().authenticated()          // Demais rotas exigem token JWT válido
+            )
+            .addFilterAt(jwtAuthWebFilter, SecurityWebFiltersOrder.AUTHENTICATION);
+        
+        return http.build();
+    }
+}

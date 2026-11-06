@@ -1,0 +1,6 @@
+package com.store.usuario.client;
+
+@Fei
+public interface UsuarioClient {
+
+}

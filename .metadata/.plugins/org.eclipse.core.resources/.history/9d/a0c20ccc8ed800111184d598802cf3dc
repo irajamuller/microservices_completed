@@ -1,0 +1,44 @@
+package com.store.municipio.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
+
+import com.store.municipio.client.CepClient;
+import com.store.municipio.dto.CepDto;
+import com.store.municipio.evento.MunicipioEvent;
+import com.store.municipio.model.Municipio;
+import com.store.municipio.model.UnidadeFederativa;
+import com.store.municipio.repository.MunicipioRepository;
+
+@Service
+public class MunicipioService {
+	
+	@Autowired
+	private CepClient cepClient;
+	@Autowired
+	private UnidadeFederativaService unidadeFederativaService;
+	@Autowired
+	private MunicipioRepository municipioRepository;
+	@Autowired
+	private KafkaTemplate<String, MunicipioEvent> kafkaTemplate;
+	
+	public Municipio save(String cep) {
+		//CepDto cepDto = restTemplate.getForObject("http://CEP-SERVICE/cep/" + cep, CepDto.class);
+		CepDto cepDto = cepClient.getOne(cep);
+
+		UnidadeFederativa uf = unidadeFederativaService.save(cepDto);
+		
+		Municipio municipio = municipioRepository.findByCodigoIbge(cepDto.getIbge()).orElse(null);
+		if (municipio == null) {
+			municipio = Municipio.builder()
+							.nome(cepDto.getLocalidade())
+							.unidadeFederativa(uf)
+							.codigoIbge(cepDto.getIbge())
+							.build();
+		}
+		municipio = municipioRepository.save(municipio);
+		return municipio;
+	}
+	
+}

@@ -1,0 +1,15 @@
+package com.store.municipio.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.store.municipio.dto.CepDto;
+
+@FeignClient(name = "CEP-SERVICE")
+public interface CepClient  {
+
+	@GetMapping("/{cep}")
+	CepDto getOne(@PathVariable String cep);
+	
+}

@@ -1,0 +1,5 @@
+package com.store.gateway.service;
+
+public class UsuarioValidacaoService {
+
+}

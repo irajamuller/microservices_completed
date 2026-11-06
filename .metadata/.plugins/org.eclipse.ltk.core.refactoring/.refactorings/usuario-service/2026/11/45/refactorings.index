@@ -1,0 +1,23 @@
+1793704404511	Rename package 'com.store.municipio'
+1793704409306	Rename package 'com.store.municipio.controller'
+1793704414212	Rename package 'com.store.municipio.dto'
+1793704418769	Rename package 'com.store.municipio.model'
+1793704423583	Rename package 'com.store.municipio.repository'
+1793704427899	Rename package 'com.store.municipio.service'
+1793704434381	Rename type 'MunicipioApplication'
+1793704439412	Rename type 'MunicipioController'
+1793704460615	Rename type 'CepDto'
+1793704472709	Delete elements
+1793704538196	Delete elements
+1793704559640	Delete elements
+1793704639960	Delete element
+1793704716609	Delete element
+1793705373036	Rename type 'UserController'
+1793705382054	Rename type 'UsuarioController'
+1793705396676	Rename type 'UsuarioDto'
+1793705424191	Rename type 'UserInfoDto'
+1793706351073	Move compilation unit
+1793707337543	Delete element
+1793707764066	Delete elements
+1793709851317	Delete element
+1793711614364	Copy compilation unit

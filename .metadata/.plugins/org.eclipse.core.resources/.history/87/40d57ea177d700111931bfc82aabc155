@@ -1,0 +1,12 @@
+package com.store.municipio.repository;
+
+import java.util.Optional;
+import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.store.usuario.model.UnidadeFederativa;
+
+public interface UnidadeFederativaRepository extends JpaRepository<UnidadeFederativa, UUID> {
+	Optional<UnidadeFederativa> findBySigla(String sigla);
+}

@@ -1,0 +1,8 @@
+package com.store.gateway.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient(name = "USUARIO-SERVICE")
+public interface UsuarioClient {
+	
+}

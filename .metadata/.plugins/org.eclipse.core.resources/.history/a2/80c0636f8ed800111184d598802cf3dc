@@ -1,0 +1,14 @@
+package com.store.municipio.evento;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter @Setter
+public class MunicipioEvent {
+	private UUID id;
+	private String nome;
+	private LocalDateTime dtAtualizacao;
+}

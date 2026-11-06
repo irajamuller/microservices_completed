@@ -1,0 +1,5 @@
+package com.store.usuario.repository;
+
+public class UserInfoRepository {
+
+}

@@ -1,0 +1,47 @@
+server.port=8005
+
+spring.application.name=GATEWAY-SERVICE
+
+spring.cloud.gateway.server.webflux.routes[0].id=CEP-SERVICE
+spring.cloud.gateway.server.webflux.routes[0].uri=lb://CEP-SERVICE
+spring.cloud.gateway.server.webflux.routes[0].predicates[0]=Path=/cep/**
+
+spring.cloud.gateway.server.webflux.routes[1].id=MUNICIPIO-SERVICE
+spring.cloud.gateway.server.webflux.routes[1].uri=lb://MUNICIPIO-SERVICE
+spring.cloud.gateway.server.webflux.routes[1].predicates[0]=Path=/municipio/**
+
+spring.cloud.gateway.server.webflux.routes[2].id=USUARIO-SERVICE
+spring.cloud.gateway.server.webflux.routes[2].uri=lb://USUARIO-SERVICE
+spring.cloud.gateway.server.webflux.routes[2].predicates[0]=Path=/usuario/**
+
+eureka.client.register-with-eureka=true
+eureka.client.fetch-registry=true
+eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
+eureka.instance.hostname=localhost
+
+# Resillience4j Circuit Breaker Configuration
+# Habilita o actuator
+resilience4j.circuitbreaker.instances.cepServiceCircuitBreaker.registerHealthIndicator=true 
+# Ultimas 10 chamadas para considerar erro
+resilience4j.circuitbreaker.instances.cepServiceCircuitBreaker.slidingWindowSize=10 
+# 50% de falhas para abrir o circuito
+resilience4j.circuitbreaker.instances.cepServiceCircuitBreaker.failureRateThreshold=50 
+# Tempo que o circuito fica aberto antes de ir para o half-open
+resilience4j.circuitbreaker.instances.cepServiceCircuitBreaker.waitDurationInOpenState=5000
+# Numero de chamadas permitidas no estado half-open para testar se o servico voltou
+resilience4j.circuitbreaker.instances.cepServiceCircuitBreaker.permittedNumberOfCallsInHalfOpenState=3
+# Chamada lenta acima de 10 segundos
+resilience4j.circuitbreaker.instances.cepServiceCircuitBreaker.slow-call-duration-threshold=10s
+# 80% de chamadas lentas para abrir o circuito
+resilience4j.circuitbreaker.instances.cepServiceCircuitBreaker.slow-call-rate-threshold=80
+
+resilience4j.circuitbreaker.instances.municipioServiceCircuitBreaker.registerHealthIndicator=true
+resilience4j.circuitbreaker.instances.municipioServiceCircuitBreaker.slidingWindowSize=1 
+resilience4j.circuitbreaker.instances.municipioServiceCircuitBreaker.failureRateThreshold=1 
+resilience4j.circuitbreaker.instances.municipioServiceCircuitBreaker.waitDurationInOpenState=5000
+resilience4j.circuitbreaker.instances.municipioServiceCircuitBreaker.permittedNumberOfCallsInHalfOpenState=3 
+resilience4j.circuitbreaker.instances.municipioServiceCircuitBreaker.slow-call-duration-threshold=10s
+resilience4j.circuitbreaker.instances.municipioServiceCircuitBreaker.slow-call-rate-threshold=80
+
+management.endpoints.web.exposure.include=health,info,metrics,prometheus,circuitbreakers,resilience-metrics
+management.endpoint.health.show-details=always

@@ -1,0 +1,26 @@
+package com.store.gateway;
+
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+
+@Configuration
+public class JwtDecoderConfig {
+
+	// Colocar em arquivo
+	public static final String SECRET = "5367566859703373367639792F423F452848284D6251655468576D5A71347437";
+	
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        SecretKey originalKey = new SecretKeySpec(jwtSecret.getBytes(), "HmacSHA256");
+        return NimbusJwtDecoder.withSecretKey(originalKey).build();
+    }
+}

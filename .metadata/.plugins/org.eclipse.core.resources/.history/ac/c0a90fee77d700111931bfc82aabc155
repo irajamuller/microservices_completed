@@ -1,0 +1,6 @@
+package com.store.usuario.repository;
+
+@Repository
+public interface UserInfoRepository extends JpaRepository<UserInfo, UUID> {
+	Optional<UserInfo> findByEmail(String email);
+}

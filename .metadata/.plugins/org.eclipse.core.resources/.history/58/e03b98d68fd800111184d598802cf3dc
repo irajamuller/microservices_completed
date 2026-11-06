@@ -1,0 +1,17 @@
+package com.store.auditoria.consumer;
+
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Component;
+
+@Component
+public class AuditoriaConsumer {
+	
+	@KafkaListener(topics = "municipio-atualizado-topic", groupId = "meu-grupo-consumidor")
+    public void ouvirAtualizacao(MunicipioAtualizadoEvent evento) {
+        System.out.println("Mensagem recebida do Kafka!");
+        
+        System.out.println("ID: " + evento.getId());
+        System.out.println("Novo Nome: " + evento.getNome());
+        System.out.println("Atualizado em: " + evento.getDataAtualizacao());
+    }	
+}

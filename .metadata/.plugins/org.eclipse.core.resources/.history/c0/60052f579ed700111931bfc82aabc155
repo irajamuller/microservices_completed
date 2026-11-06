@@ -1,0 +1,8 @@
+package com.store.municipio.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+
+@FeignClient
+public interface CepClient  {
+
+}

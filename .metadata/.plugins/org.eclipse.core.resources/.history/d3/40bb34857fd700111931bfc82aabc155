@@ -1,0 +1,5 @@
+package com.store.gateway.client;
+
+public interface UsuarioClient {
+	
+}

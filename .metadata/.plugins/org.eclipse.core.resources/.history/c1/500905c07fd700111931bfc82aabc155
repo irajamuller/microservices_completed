@@ -1,0 +1,8 @@
+@Builder
+@AllArgsConstructor @NoArgsConstructor
+@Getter @Setter
+@EqualsAndHashCode(of = "username")
+public class UserInfoRequestDTO {
+	private String username;
+	private String password;
+}

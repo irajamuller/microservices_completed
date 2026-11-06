@@ -1,0 +1,47 @@
+package com.store.usuario.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.store.usuario.UserInfoDetails;
+import com.store.usuario.model.UserInfo;
+import com.store.usuario.repository.UserInfoRepository;
+
+@Service
+public class UserInfoService implements UserDetailsService {
+	@Autowired
+	private UserInfoRepository repository;
+	
+	@Autowired
+	@Lazy
+    private PasswordEncoder encoder;
+	
+	private JwtService jwtService;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		    UserInfo user = repository.findByEmail(username)
+		            .orElseThrow(() ->
+		                    new UsernameNotFoundException(
+		                            "User not found with email: " + username));
+
+		    return new UserInfoDetails(user);
+	}
+
+	public boolean isValidToken(String token) {
+        token = token.substring(7);
+        String username = jwtService.extractUsername(token);
+        
+        
+	}
+	
+    public UserInfo save(UserInfo userInfo) {
+        userInfo.setPassword(encoder.encode(userInfo.getPassword())); 
+        return repository.save(userInfo);
+    }
+}

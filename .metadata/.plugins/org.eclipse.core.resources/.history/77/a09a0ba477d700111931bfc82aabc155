@@ -1,0 +1,23 @@
+package com.store.usuario.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.store.municipio.service.MunicipioService;
+import com.store.usuario.model.Municipio;
+
+@RestController
+@RequestMapping("/municipio")
+public class MunicipioController {
+
+	@Autowired
+	private MunicipioService municipioService;
+	
+	@PostMapping("/{cep}")
+	public Municipio getOne(@PathVariable String cep) {
+		return municipioService.save(cep);
+	}
+}

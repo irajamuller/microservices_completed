@@ -1,0 +1,29 @@
+package com.store.municipio.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.store.municipio.model.UnidadeFederativa;
+import com.store.municipio.repository.UnidadeFederativaRepository;
+import com.store.usuario.dto.CepDto;
+
+@Service
+public class UnidadeFederativaService {
+	
+	@Autowired
+	private UnidadeFederativaRepository unidadeFederativaRepository;
+
+	public UnidadeFederativa save(CepDto cepDto) {
+		UnidadeFederativa uf = unidadeFederativaRepository.findBySigla(cepDto.getUf()).orElse(null);
+		if (uf == null) {
+			uf = unidadeFederativaRepository.save(UnidadeFederativa
+					.builder()
+					.nome(cepDto.getEstado())
+					.sigla(cepDto.getUf())
+					.build());
+		}
+		uf = unidadeFederativaRepository.save(uf);
+		return uf;
+	}
+	
+}

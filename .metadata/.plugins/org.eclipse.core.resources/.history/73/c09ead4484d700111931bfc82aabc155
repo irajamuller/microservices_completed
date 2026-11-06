@@ -1,0 +1,5 @@
+package com.store.usuario;
+
+public class AuthenticatiorManager {
+
+}
